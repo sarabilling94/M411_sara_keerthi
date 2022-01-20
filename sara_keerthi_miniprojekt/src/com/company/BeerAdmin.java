@@ -19,4 +19,11 @@ public class BeerAdmin {
 
     }
 
+    public void printBeerList(){
+
+    }
+
+    public void printBeer(String id){
+
+    }
 }

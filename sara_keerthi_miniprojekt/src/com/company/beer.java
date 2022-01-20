@@ -11,11 +11,8 @@ public class beer {
         this.idStyle = idStyle;
     }
 
-    public void printBeerList(){
+    public void toString(){
 
     }
 
-    public void printBeer(String id){
-
-    }
 }
