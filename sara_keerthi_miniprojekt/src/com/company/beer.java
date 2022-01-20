@@ -13,8 +13,9 @@ public class beer {
         this.idStyle = idStyle;
     }
 
-    public void toString(){
-
+    @Override
+    public String toString(){
+        return null;
     }
 
 }
