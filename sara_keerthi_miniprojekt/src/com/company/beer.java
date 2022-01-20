@@ -1,3 +1,5 @@
+package com.company;
+
 public class beer {
     private String id;
     private String name;

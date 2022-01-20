@@ -1,8 +1,6 @@
+package com.company;
+
 public class BeerAdmin {
-
-
-
-
 
     public void loadBeerStyles(){
 
