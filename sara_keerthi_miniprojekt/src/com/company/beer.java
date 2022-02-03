@@ -6,6 +6,22 @@ public class beer {
     private String description;
     private int idStyle;
 
+    public String getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public int getIdStyle() {
+        return idStyle;
+    }
+
     public beer(String id, String name, String description, int idStyle){
         this.id = id;
         this.name = name;

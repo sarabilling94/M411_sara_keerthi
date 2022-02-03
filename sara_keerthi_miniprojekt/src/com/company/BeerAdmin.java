@@ -8,7 +8,7 @@ import java.util.HashMap;
 
 public class BeerAdmin {
     private HashMap<Integer, String> hashMapbeers;
-    ArrayList<beer> beers = new ArrayList<>();
+    private ArrayList<beer> beers = new ArrayList<>();
 
     public ArrayList<beer> loadBeers() throws IOException {
         beers = new ArrayList<>();
@@ -53,7 +53,10 @@ public class BeerAdmin {
 
     public void getBeerListForStyle(int idStyle) {
         String url = "http://api.brewerydb.com/v2/beers/?key=1511d0db4a1d6841481c672455358cff&styleId=" + idStyle;
+        String endpoint = "beers";
+        String styleId = String.valueOf(idStyle);
 
+        beers = loadBeers()
     }
 
     public void printBeerList() throws IOException {
