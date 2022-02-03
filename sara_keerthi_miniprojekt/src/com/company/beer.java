@@ -13,8 +13,12 @@ public class beer {
         this.idStyle = idStyle;
     }
 
+
     @Override
     public String toString(){
+        //String idStyleString = Integer.toString(idStyle);
+        String beerString = String.format("" + id + ";" + name + ";" + description + "%d",idStyle);
+        System.out.println(beerString);
         return null;
     }
 

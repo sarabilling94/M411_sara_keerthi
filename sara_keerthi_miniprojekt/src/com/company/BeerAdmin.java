@@ -63,11 +63,16 @@ public class BeerAdmin {
 
     }
 
-    public void printBeerList() {
-
+    public void printBeerList() throws IOException {
+        beers = loadBeerStyles();
+        beers.forEach((key, value) ->{
+            System.out.println(key + " - " + value);
+        });
     }
 
-    public void printBeer(String id) {
-
-    }
+    public void printBeer(String id) throws IOException {
+        beers = loadBeerStyles();
+        beers.forEach((key, value) ->{
+        System.out.println("Bier: " + key + " - " + value + "\n" + description);
+    });
 }
