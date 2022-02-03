@@ -1,25 +1,17 @@
 package com.company;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.net.URL;
-import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class BeerAdmin {
-    private HashMap<Integer, String> beers;
+    private HashMap<Integer, String> hashMapbeers;
+    ArrayList<beer> beers = new ArrayList<>();
 
     public ArrayList<beer> loadBeers() throws IOException {
-        ArrayList<beer> beers = new ArrayList<>();
+        beers = new ArrayList<>();
         JsonNode jsonNode = JsonReader.apiCall("beers", "");
         for (JsonNode style : jsonNode.get("data")) {
             String id = style.get("id").asText();
@@ -44,35 +36,37 @@ public class BeerAdmin {
     }
 
     public void printBeerStyles() throws IOException {
-        beers = loadBeerStyles();
-        beers.forEach((key, value) -> {
+        hashMapbeers = loadBeerStyles();
+        hashMapbeers.forEach((key, value) -> {
             System.out.println(key + "::" + value);
         });
     }
 
     public void printBeerStyles(String search) throws IOException {
-        beers = loadBeerStyles();
-        beers.forEach((key, value) ->{
-            if(value.contains(search)){
+        hashMapbeers = loadBeerStyles();
+        hashMapbeers.forEach((key, value) -> {
+            if (value.contains(search)) {
                 System.out.println(key + "::" + value);
             }
         });
     }
 
     public void getBeerListForStyle(int idStyle) {
+        String url = "http://api.brewerydb.com/v2/beers/?key=1511d0db4a1d6841481c672455358cff&styleId=" + idStyle;
 
     }
 
     public void printBeerList() throws IOException {
-        beers = loadBeerStyles();
-        beers.forEach((key, value) ->{
+        hashMapbeers = loadBeerStyles();
+        hashMapbeers.forEach((key, value) -> {
             System.out.println(key + " - " + value);
         });
     }
 
     public void printBeer(String id) throws IOException {
-        beers = loadBeerStyles();
-        beers.forEach((key, value) ->{
-        System.out.println("Bier: " + key + " - " + value + "\n" + description);
-    });
+        hashMapbeers = loadBeerStyles();
+        hashMapbeers.forEach((key, value) -> {
+            System.out.println("Bier: " + key + " - " + value + "\n" + description);
+        });
+    }
 }

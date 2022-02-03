@@ -47,7 +47,7 @@ public class JsonReader {
     }
 
     public static JsonNode apiCall(String endpoint, String params) throws IOException {
-        URL url = new URL("https://api.brewerydb.com/v2/" + endpoint + "?" + params + "&key=1511d0db4a1d6841481c672455358cff");
+        URL url = new URL("https://api.brewerydb.com/v2/" + endpoint + "?" + "&key=1511d0db4a1d6841481c672455358cff" + params);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestProperty("accept", "application/json");
         InputStream responseStream = connection.getInputStream();
