@@ -29,5 +29,7 @@ public class Main {
         //JsonNode jsonNode = JsonReader.apiCall("styles", "");
         //System.out.println(jsonNode);
 
+        beerAdmin.printBeer("98");
+
     }
 }

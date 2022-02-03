@@ -16,8 +16,16 @@ public class BeerAdmin {
         for (JsonNode style : jsonNode.get("data")) {
             String id = style.get("id").asText();
             String name = style.get("name").asText();
-            String description = style.get("description").asText();
-            Integer idStyle = style.get("styleId").asInt();
+            String description = "";
+            Integer idStyle = 0;
+            try {
+                description = style.get("description").asText();
+            } catch (Exception e) {
+            }
+            try {
+                idStyle = style.get("styleId").asInt();
+            } catch (Exception e) {
+            }
             beers.add(new beer(id, name, description, idStyle));
         }
         return beers;
@@ -51,12 +59,17 @@ public class BeerAdmin {
         });
     }
 
-    public void getBeerListForStyle(int idStyle) {
-        String url = "http://api.brewerydb.com/v2/beers/?key=1511d0db4a1d6841481c672455358cff&styleId=" + idStyle;
-        String endpoint = "beers";
-        String styleId = String.valueOf(idStyle);
-
-        beers = loadBeers()
+    public HashMap<Integer, beer> getBeerListForStyle(int styleId) throws IOException {
+        HashMap<Integer, beer> beersForStyle = new HashMap<>();
+        JsonNode jsonNode = JsonReader.apiCall("beers", String.valueOf(styleId));
+        for (JsonNode style : jsonNode.get("data")) {
+            String id = style.get("id").asText();
+            String name = style.get("name").asText();
+            String description = style.get("description").asText();
+            Integer idStyle = style.get("styleId").asInt();
+            beersForStyle.put(Integer.parseInt(id), new beer(id, name, description, idStyle));
+        }
+        return beersForStyle;
     }
 
     public void printBeerList() throws IOException {
@@ -67,9 +80,11 @@ public class BeerAdmin {
     }
 
     public void printBeer(String id) throws IOException {
-        hashMapbeers = loadBeerStyles();
-        hashMapbeers.forEach((key, value) -> {
-            System.out.println("Bier: " + key + " - " + value + "\n" + description);
+        beers = loadBeers();
+        beers.forEach((beer) -> {
+            if (beer.getId().equals(id)) {
+                System.out.println(id + "::" + beer.getName() + "\n" + beer.getDescription());
+            }
         });
     }
 }
