@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -12,6 +13,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
@@ -41,5 +44,15 @@ public class JsonReader {
         } finally {
             is.close();
         }
+    }
+
+    public static JsonNode apiCall(String endpoint, String params) throws IOException {
+        URL url = new URL("https://api.brewerydb.com/v2/" + endpoint + "?" + params + "&key=1511d0db4a1d6841481c672455358cff");
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        connection.setRequestProperty("accept", "application/json");
+        InputStream responseStream = connection.getInputStream();
+        ObjectMapper mapper = new ObjectMapper();
+        JsonNode node = mapper.readTree(responseStream);
+        return node;
     }
 }
