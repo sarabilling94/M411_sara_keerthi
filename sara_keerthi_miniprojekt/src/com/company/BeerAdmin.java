@@ -34,12 +34,17 @@ public class BeerAdmin {
     public void printBeerStyles() throws IOException {
         beers = loadBeerStyles();
         beers.forEach((key, value) -> {
-            System.out.print(key + "::" + value);
+            System.out.println(key + "::" + value);
         });
     }
 
-    public void printBeerStyles(String search) {
-
+    public void printBeerStyles(String search) throws IOException {
+        beers = loadBeerStyles();
+        beers.forEach((key, value) ->{
+            if(value.contains(search)){
+                System.out.println(key + "::" + value);
+            }
+        });
     }
 
     public void getBeerListForStyle(int idStyle) {
